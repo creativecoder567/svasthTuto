@@ -68,4 +68,13 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function register(Request $request)
+    {
+      $this->validate($request,[
+        'name'=>'required',
+        'email'=>'required|email|unique:users,email',
+        'passowrd'=>'required|min:6|confirmed',
+      ]);
+    }
 }
